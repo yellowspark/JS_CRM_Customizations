@@ -22,24 +22,61 @@
 // ).call(Sdk)
 
 
+// var Sdk = window.Sdk || {};
+
+// (function () {
+//     this.formOnLoad = function (executionContext) {
+//         // Code for form onLoad event can go here if needed.
+//     };
+
+//     this.MainPhoneOnChange = function (executionContext) {
+//         var formContext = executionContext.getFormContext();
+//         var phoneNumber = formContext.getAttribute("telephone1").getValue();
+
+//         // Regular expression for USA phone numbers.
+//         var expression = new RegExp(
+//             /^(?:\+1\s?)?(\([2-9][0-8][0-9]\)\s?|[2-9][0-8][0-9][-.\s]?)?[2-9][0-9]{2}[-.\s]?[0-9]{4}$/
+//         );
+
+//         if (!expression.test(phoneNumber)) {
+
+    
+//             alert("Enter a valid USA phone number.");
+//         }
+//     };
+// }).call(Sdk);
+
+
 var Sdk = window.Sdk || {};
 
 (function () {
     this.formOnLoad = function (executionContext) {
-        // Code for form onLoad event can go here if needed.
+       
     };
 
     this.MainPhoneOnChange = function (executionContext) {
         var formContext = executionContext.getFormContext();
         var phoneNumber = formContext.getAttribute("telephone1").getValue();
 
-        // Regular expression for USA phone numbers.
+        
         var expression = new RegExp(
             /^(?:\+1\s?)?(\([2-9][0-8][0-9]\)\s?|[2-9][0-8][0-9][-.\s]?)?[2-9][0-9]{2}[-.\s]?[0-9]{4}$/
         );
 
         if (!expression.test(phoneNumber)) {
-            alert("Enter a valid USA phone number.");
+
+            formContext.getControl("telephone1").setNotification("Enter a valid USA phone number.","telephonemessage");
+
+            //formNotification
+
+            formContext.ui.setFormNotification("Just Info","INFO", "InfoMsg");
+            
+        }
+        else{
+
+            formContext.getControl("telephone1").clearNotification("telephonemessage");
+
+            formContext.ui.clearFormNotification("InfoMsg");
         }
     };
 }).call(Sdk);
