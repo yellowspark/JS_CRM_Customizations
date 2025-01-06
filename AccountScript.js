@@ -53,6 +53,15 @@ var Sdk = window.Sdk || {};
     this.formOnLoad = function (executionContext) {
        
     };
+    
+    // To prevent AutoSave
+    this.FormOnSave= function(executionContext){
+        
+            var eventArgs = executionContext.getEventArgs();
+            if (eventArgs.getSaveMode() == 70 || eventArgs.getSaveMode() == 2) {
+                eventArgs.preventDefault();
+            }
+    }
 
     this.MainPhoneOnChange = function (executionContext) {
         var formContext = executionContext.getFormContext();
